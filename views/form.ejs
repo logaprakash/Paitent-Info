@@ -73,10 +73,10 @@
 							<input type="date" name="dob" placeholder="Date of birth" class="form-control" required>
 						</div>
 						<div class="form-group">
-							<input type="number" maxlength="3" name="age" placeholder="Age" class="form-control" required>
+							<input type="number" min="1" max="200" name="age" placeholder="Age" class="form-control" required>
 						</div>
 						<div class="form-group">
-							<input type="number"  minlength="10" maxlength="10" name="phone" placeholder="Phone" class="form-control" required>						
+							<input type="number"  min="1000000000" max="9999999999" name="phone" placeholder="Phone" class="form-control" required>						
 						</div>
 						<div class="form-group">			
 							<Textarea class="form-textarea" name="other" cols="2" rows="2" placeholder="others"></Textarea>
