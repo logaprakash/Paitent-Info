@@ -7,7 +7,7 @@
 body {
 	font-size: 16px;
 	line-height: 25px;
-	margin-top: 50px;
+	margin-top: 150px;
 	color: black;
 	background: #c0deed;
 	font-family: Segoe UI;
@@ -120,8 +120,8 @@ form p a {
   background: #fff;
   border-radius: 5px;
   display: inline-block;
-  height: 20%;
-  padding: 1% 1% 1% 1%;
+  height: 10%;
+  padding: 2% 2% 2% 2%;
   position: relative;
   width: 100%;
 }
