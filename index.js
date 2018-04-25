@@ -20,7 +20,6 @@ app.get("/",function(req,res){
 	res.render("form");  
 });
 
-
 app.post("/",async (req,res) =>
 {
 	
@@ -45,10 +44,15 @@ app.post("/",async (req,res) =>
 });
 
 app.get('/search', async (req, res) => {
+    res.render('search');
+});
+
+app.get('/get-all', async (req, res) => {
   try {
     const client = await pool.connect()
     const result = await client.query('SELECT * FROM paitent');
-    res.render('search',{results: result.rows});
+    res.setHeader('Content-Type', 'application/json');
+    res.send({results: result.rows});
     client.release();
   } catch (err) {
     console.error(err);

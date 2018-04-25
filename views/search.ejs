@@ -10,44 +10,49 @@
     <!-- CSS file -->
     <link rel="stylesheet" type="text/css" href="styles/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="styles/style.css">
-    
+	
   
+	<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    
+    <!-- Angular -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script>
+var app = angular.module('paitentsApp', []);
+app.controller('getAll', function($scope, $http) {
+   $http.get("/get-all")
+   .then(function (response) {$scope.rows = response.data.results;});
+});
 
+
+</script>
      
   </head>
   
 <body>
-	<div class="container"><!--start container-->	
-
-		<div class="row"><!--start row-->
-				<% results.forEach(function(row){ %>
-					<div class="card-short card-1">
-						<h4><%= row.firstname %></h4>
-						<h4><%= row.lastname %></h4>
-						<p>Age: <%= row.age %></p>
-						<p>DOB: <%= row.dob %></p>
-						<p>Gender: <%= row.gender %></p>
-						<p>Phone: <%= row.phone %></p>
-						<p>Other: <%= row.other %></p>
-					</div>
-				 <% })%>
+	<div class="container" ng-app="paitentsApp" ng-controller="getAll"><!--start container-->	
+		<div class="card-shorter card-1">
+			<div class="form-group">
+					<input type="text" ng-model="search" name="search" placeholder="Search" class="form-control"/>
+			</div>
 		</div>
+		<div class="row"><!--start row-->
+				<div ng-repeat="row in rows">
+					<div ng-if="row.firstname.indexOf(search)>=0" class="card-short card-1" >
+						<h4>{{ row.firstname }}</h4>
+						<h4>{{ row.lastname }}</h4>
+						<p>Age: {{ row.age }}</p>
+						<p>DOB: {{ row.dob }}</p>
+						<p>Gender: {{ row.gender }}</p>
+						<p>Phone: {{ row.phone }}</p>
+						<p>Other: {{ row.other }}</p>
+					</div>
+				</div>
+		</div>
+	</div>
 
-  <ul>
-  
-    
- 
-</ul>
-  
-    <!--jquery -->
-    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-    
-    <!-- Angular -->
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.2/angular.min.js"></script>
-   
 
-    
-    <!-- Controller -->
-    <script src="../controller.js"></script>
-  </body>
+
+  
+  
+</body>
 </html>
