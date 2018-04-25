@@ -1,0 +1,136 @@
+/*Created on 16-2-2018, by Shivraj Keshaowar*/
+
+
+/***************************************
+				body
+***************************************/
+body {
+	font-size: 16px;
+	line-height: 25px;
+	margin-top: 50px;
+	color: black;
+	font-family: Segoe UI;
+}
+
+
+.custom-margin {
+	margin-left: 27.33%;
+}
+/***************************************
+				header
+***************************************/
+header {
+	margin-bottom: 10px;
+}
+
+header ul {
+	float: right;
+}
+
+header ul li {
+	float: right;
+}
+
+header ul li a {
+	text-decoration: none;
+	color: #fff;
+}
+
+/***************************************
+				logo-mini
+***************************************/
+.logo-mini {
+	height: 128px;
+	width: 600px;	
+}
+
+/***************************************
+ container-fluid, white-box, img
+***************************************/
+.white-box {
+	background-color: #fff;
+	border-radius: 4px;
+}
+.white-box img {
+	margin-left: 15px;
+}
+/***************************************
+				footer
+***************************************/
+footer {
+	padding: 10px 0;
+	background-color: #101010;
+	color: #9d9d9d;
+	bottom: 10px;
+	width: 100%;
+}
+
+/***************************************
+				login form/panel
+***************************************/
+.panel {
+	margin-top: 10%; 
+}
+
+.panel-footer p {
+	color: #000;
+}
+
+.panel-footer p a {
+	text-decoration: none;
+}
+
+/***************************************
+				Sign Up form/page
+***************************************/
+.form-heading {
+	color: #000;
+	font-weight: bold;
+}
+
+form p {
+	color: #000;
+} 
+
+form p a {
+	text-decoration: none;
+}
+
+.card {
+  background: #fff;
+  border-radius: 5px;
+  display: inline-block;
+  height: 85%;
+  margin: 1rem;
+  padding: 5% 5% 5% 5%;
+  position: relative;
+  width: 100%;
+
+}
+.card-short {
+  background: #fff;
+  border-radius: 5px;
+  display: inline-block;
+  height: 40%;
+  margin: 1rem;
+  padding: 5% 5% 5% 5%;
+  position: relative;
+  width: 100%;
+
+}
+.card-1 {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  /*box-shadow: 0 0px 0px rgba(0,0,0,0.12), 0 0px 0px rgba(0,0,0,0.24);*/
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.card-1:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  /*background-color: #72d793;*/
+}
+
+.form-textarea{
+	border: 1px #888888;
+	resize: none;
+	width: 100%;
+}

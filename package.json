@@ -1,16 +1,18 @@
 {
   "name": "paitent-info",
-  "version": "0.0.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "Collects paitent info and search local with name",
+  "main": "index.js",
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./index.js"
   },
+  "author": "Logaprakash Raju",
+  "license": "ISC",
   "dependencies": {
-    "cookie-parser": "~1.4.3",
-    "debug": "~2.6.9",
-    "express": "~4.16.0",
-    "http-errors": "~1.6.2",
-    "jade": "~1.11.0",
-    "morgan": "~1.9.0"
+    "express": "^4.15.2",
+    "ejs": "^2.5.6",
+    "npm": "^6.0.0",
+    "pg": "^7.4.1",
+    "pg-promise": "^8.4.0"
   }
 }
