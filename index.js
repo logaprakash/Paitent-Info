@@ -17,7 +17,7 @@ const pool = new Pool({
 });
 
 app.get("/",function(req,res){
-	res.sendfile("./views/form.html");  
+	res.render("form");  
 });
 
 
@@ -48,7 +48,7 @@ app.get('/search', async (req, res) => {
   try {
     const client = await pool.connect()
     const result = await client.query('SELECT * FROM paitent');
-    res.render('search',result);
+    res.render('search',{results: result.rows});
     client.release();
   } catch (err) {
     console.error(err);
