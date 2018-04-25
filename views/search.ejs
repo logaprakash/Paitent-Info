@@ -22,7 +22,13 @@ app.controller('getAll', function($scope, $http) {
    $http.get("/get-all")
    .then(function (response) {$scope.rows = response.data.results;});
 });
-
+$scope.isEmpty = function(obj) {
+  for(var prop in obj) {
+      if(obj.hasOwnProperty(prop))
+          return false;
+  }
+  return true;
+};
 
 </script>
      
@@ -30,14 +36,29 @@ app.controller('getAll', function($scope, $http) {
   
 <body>
 	<div class="container" ng-app="paitentsApp" ng-controller="getAll"><!--start container-->	
+	<div class="col-xs-8 col-xs-offset-2 col-md-4 col-md-offset-4">
 		<div class="card-shorter card-1">
 			<div class="form-group">
-					<input type="text" ng-model="search" name="search" placeholder="Search" class="form-control"/>
+					<input type="text" value="" ng-model="search" name="search" placeholder="Enter paitent's firstname to search" class="form-control"/>
 			</div>
 		</div>
 		<div class="row"><!--start row-->
+			<div ng-show="!isEmpty(search)">
 				<div ng-repeat="row in rows">
-					<div ng-if="row.firstname.indexOf(search)>=0" class="card-short card-1" >
+					<div ng-if="row.firstname.toLowerCase().indexOf(search.toLowerCase())== 0" class="card-short card-1" >
+						<h4>Firstname: {{ row.firstname }}</h4>
+						<h4>Lastname: {{ row.lastname }}</h4>
+						<p>Age: {{ row.age }}</p>
+						<p>DOB: {{ row.dob }}</p>
+						<p>Gender: {{ row.gender }}</p>
+						<p>Phone: {{ row.phone }}</p>
+						<p>Other: {{ row.other }}</p>
+					</div>
+				</div>
+			</div>
+			<div ng-show="isEmpty(search)">
+				<div ng-repeat="row in rows">
+					<div class="card-short card-1" >
 						<h4>{{ row.firstname }}</h4>
 						<h4>{{ row.lastname }}</h4>
 						<p>Age: {{ row.age }}</p>
@@ -46,7 +67,9 @@ app.controller('getAll', function($scope, $http) {
 						<p>Phone: {{ row.phone }}</p>
 						<p>Other: {{ row.other }}</p>
 					</div>
-				</div>
+				<div>
+			</div>
+		</div>
 		</div>
 	</div>
 

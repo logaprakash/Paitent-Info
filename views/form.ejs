@@ -8,6 +8,14 @@
 	
 	<link rel="stylesheet" type="text/css" href="styles/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="styles/style.css">
+	
+	
+	<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    
+    <!-- Angular -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	
+	
 </head>
 <body>
 	<div class="container"><!--start container-->	
@@ -19,8 +27,7 @@
 				<div class="card card-1">
 					
 					<form action="/" method="POST">
-						
-						<h3>Add patient information</h3>
+						<h4>Add patient information</h4>
 					
 						<div class="form-group">
 							<input type="text" name="firstname" placeholder="Firstname" class="form-control" required/>
@@ -39,10 +46,10 @@
 							<input type="date" name="dob" placeholder="Date of birth" class="form-control" required>
 						</div>
 						<div class="form-group">
-							<input type="text" name="age" placeholder="Age" class="form-control" required>
+							<input type="number" maxlength="3" name="age" placeholder="Age" class="form-control" required>
 						</div>
 						<div class="form-group">
-							<input type="phone" name="phone" placeholder="Phone" class="form-control" required>
+							<input type="number"  minlength="10" maxlength="10" name="phone" placeholder="Phone" class="form-control" required>						
 						</div>
 						<div class="form-group">			
 							<Textarea class="form-textarea" name="other" cols="2" rows="2" placeholder="others"></Textarea>
@@ -50,7 +57,6 @@
 						<div class="form-group">
 							<input type="submit" name="submit" value="Submit" class="btn btn-primary"/>
 						</div>
-						
 					</form>
 			
 				</div>
