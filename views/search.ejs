@@ -35,6 +35,33 @@ $scope.isEmpty = function(obj) {
   </head>
   
 <body>
+<header><!--start header-->
+		
+		<nav class="navbar navbar-fixed-top" style="background:#3c465a;"><!--start nav-->
+			
+			<div class="container">
+				
+				<div class="navbar-header">
+					
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+					</button>
+
+				</div>
+
+				<div class="collapse navbar-collapse" id="myNavbar">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="/"><span class="glyphicon glyphicon-plus"></span>Add patient</a></li>
+						<li><a href="/search"><span class="glyphicon glyphicon-user"></span>Search patient</a></li>
+					</ul>				
+				</div>
+
+			</div>
+
+		</nav><!--end nav-->
+
+	</header><!--end header-->
 	<div class="container" ng-app="paitentsApp" ng-controller="getAll"><!--start container-->	
 	<div class="col-xs-8 col-xs-offset-2 col-md-4 col-md-offset-4">
 		<div class="card-shorter card-1">
