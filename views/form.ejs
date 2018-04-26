@@ -36,11 +36,11 @@ app.filter('ageFilter', function() {
 </script>
 <script>
 $(function(){
-    var dtToday = new Date();
+    var Today = new Date();
 
-    var month = dtToday.getMonth() + 1;
-    var day = dtToday.getDate();
-    var year = dtToday.getFullYear();
+    var month = Today.getMonth() + 1;
+    var day = Today.getDate();
+    var year = Today.getFullYear();
 
     if(month < 10)
         month = '0' + month.toString();
@@ -88,15 +88,19 @@ $(function(){
 
 				<div class="card card-1">
 					
-					<form action="/" method="POST" name="formValidation">
+					<form action="/" method="POST" name="paitentForm" id="paitentForm">
 						<h4>Add paitient information</h4>
 					
 						<div class="form-group">
-							<input type="text"  pattern="[A-Za-z]{1,50}"  name="firstname" placeholder="*Firstname" class="form-control" required/>
+							<input type="text" ng-pattern="/^[a-zA-Z]*$/" ng-maxlength="50"  name="firstname" placeholder="*Firstname" ng-model="firstname" class="form-control" required/>
+							<p ng-show="paitentForm.firstname.$error.pattern || paitentForm.firstname === undefined" class="help-block">Number/Space/Special characters are not allowed for firstname</p>
+							<p ng-show="paitentForm.firstname.$error.maxlength || paitentForm.firstname === undefined" class="help-block">Maxlength for this firstname is 50</p>
 						</div>
 			
 						<div class="form-group">
-							<input type="text" name="lastname"  pattern="[A-Za-z]{1,50}" placeholder="*Lastname" class="form-control" required>
+							<input type="text" name="lastname"  ng-pattern="/^[a-zA-Z]*$/"  ng-maxlength="50" placeholder="*Lastname" ng-model="lastname" class="form-control" required>
+							<p ng-show="paitentForm.lastname.$error.pattern || paitentForm.lastname === undefined" class="help-block">Number/Space/Special characters are not allowed for lastname</p>
+							<p ng-show="paitentForm.lastname.$error.maxlength || paitentForm.lastname === undefined" class="help-block">Maxlength for this lastname is 50</p>
 						</div>
 						<div class="form-group">
 							<Select name="gender" class="form-control" required>
@@ -105,19 +109,23 @@ $(function(){
 							</select>
 						</div>
 						<div class="form-group">
-							<input type="date" id="dob" name="dob" ng-model="dob" placeholder="Date of birth" class="form-control"  required>
+							<input type="date" id="dob" name="dob" ng-model="dob" placeholder="Date of birth" class="form-control" required>
 						</div>
 						<div class="form-group">
-							<input type="text" id="age" pattern="[0-9]{1,3}" value="{{ dob | ageFilter }}" min="1" max="200" name="age" placeholder="Age" class="form-control" required>
+							<input type="text" pattern="/^[0-9]*$/" id="age" value="{{ dob | ageFilter }}" min="0" max="200" name="age" placeholder="Age" class="form-control" required>
+							
 						</div>
 						<div class="form-group">
-							<input type="text" pattern="[0-9]{10}" name="phone" placeholder="*Phone {format: 8870563070}" class="form-control" required>						
+							<input type="text" ng-pattern="/^[0-9]*$/" name="phone" ng-maxlength="10" ng-maxlength="10" ng-model="phone" placeholder="*Phone" class="form-control" required>						
+							<p ng-show="paitentForm.phone.$error.pattern || paitentForm.phone === undefined" class="help-block">Number/Space/Special characters are not allowed for lastname</p>
+							<p ng-show="paitentForm.phone.$error.minlength || paitentForm.phone === undefined" class="help-block">Length of phone number has to be 10 {format: 8870563070} </p>
+							<p ng-show="paitentForm.phone.$error.maxlength || paitentForm.phone === undefined" class="help-block">Length of phone number has to be 10 {format: 8870563070} </p>
 						</div>
 						<div class="form-group">			
-							<Textarea class="form-textarea" pattern=".{0,512}" name="other" cols="2" rows="2" placeholder="others"></Textarea>
+							<Textarea class="form-textarea" maxlength="512" ng-model="other" name="other" cols="2" rows="2" placeholder="others"></Textarea>
 						</div>
 						<div class="form-group">
-							<input type="submit" name="submit" value="Submit" class="btn btn-primary"/>
+							<input type="submit" name="submit" value="Submit" class="btn btn-primary" ng-disabled="paitentForm.$invalid"/>
 						</div>
 					</form>
 			
