@@ -14,10 +14,10 @@
     
     <!-- Angular -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-	
+
 	
 </head>
-<body style="margin-top: 50px;">
+<body style="margin-top: 50px;" ng-app="app">
 <header><!--start header-->
 		
 		<nav class="navbar navbar-fixed-top" style="background:#3c465a;"><!--start nav-->
@@ -53,15 +53,15 @@
 
 				<div class="card card-1">
 					
-					<form action="/" method="POST">
+					<form action="/" method="POST" name="formValidation">
 						<h4>Add paitient information</h4>
 					
 						<div class="form-group">
-							<input type="text" name="firstname" placeholder="Firstname" class="form-control" required/>
+							<input type="text"  pattern="[A-Za-z]{1,50}"  name="firstname" placeholder="*Firstname" class="form-control" required/>
 						</div>
 			
 						<div class="form-group">
-							<input type="text" name="lastname" placeholder="Lastname" class="form-control" required>
+							<input type="text" name="lastname"  pattern="[A-Za-z]{1,50}" placeholder="*Lastname" class="form-control" required>
 						</div>
 						<div class="form-group">
 							<Select name="gender" class="form-control" required>
@@ -70,16 +70,16 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<input type="date" name="dob" placeholder="Date of birth" class="form-control" required>
+							<input type="date" id="dob" name="dob" placeholder="Date of birth" class="form-control" max="2017-12-31" required>
 						</div>
 						<div class="form-group">
-							<input type="number" min="1" max="200" name="age" placeholder="Age" class="form-control" required>
+							<input type="text" id="age" pattern="[0-9]{1,3}" min="1" max="200" name="age" placeholder="Age" class="form-control" required>
 						</div>
 						<div class="form-group">
-							<input type="number"  min="1000000000" max="9999999999" name="phone" placeholder="Phone" class="form-control" required>						
+							<input type="text" pattern="[0-9]{10}" name="phone" placeholder="*Phone {format: 8870563070}" class="form-control" required>						
 						</div>
 						<div class="form-group">			
-							<Textarea class="form-textarea" name="other" cols="2" rows="2" placeholder="others"></Textarea>
+							<Textarea class="form-textarea" pattern=".{0,512}" name="other" cols="2" rows="2" placeholder="others"></Textarea>
 						</div>
 						<div class="form-group">
 							<input type="submit" name="submit" value="Submit" class="btn btn-primary"/>
