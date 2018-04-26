@@ -70,7 +70,7 @@ $scope.isEmpty = function(obj) {
 			</div>
 		</div>
 		<div class="row"><!--start row-->
-			<div ng-show="!isEmpty(search)">
+			<div ng-show="search">
 				<div ng-repeat="row in rows">
 					<div ng-if="row.firstname.toLowerCase().indexOf(search.toLowerCase())== 0" class="card-short card-1" >
 						<h4>Firstname: {{ row.firstname }}</h4>
@@ -83,7 +83,7 @@ $scope.isEmpty = function(obj) {
 					</div>
 				</div>
 			</div>
-			<div ng-show="isEmpty(search)">
+			<div ng-show="!search">
 				<div ng-repeat="row in rows">
 					<div class="card-short card-1" >
 						<h4>{{ row.firstname }}</h4>
