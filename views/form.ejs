@@ -16,22 +16,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <script>
 var app = angular.module('paitentsApp', []);
-app.filter('ageFilter', function() {
-     function calculateAge(birthday) { // birthday is a date
-         var ageDifMs = Date.now() - birthday.getTime();
-         var ageDate = new Date(ageDifMs); // miliseconds from epoch
-         return Math.abs(ageDate.getUTCFullYear() - 1970);
-     }
-
-     return function(birthdate) { 
-           if(birthdate){
-				return calculateAge(birthdate);
-			}
-			else{
-				return "";
-			}
-		   
-     }; 
+app.controller('MainCtrl', function($scope) {
+  $scope.name = 'World';
+  var today=new Date();
+  $scope.today = today.toISOString();
 });
 </script>
 <script>
@@ -49,7 +37,23 @@ $(function(){
 
     var maxDate = year + '-' + month + '-' + day;    
     $('#dob').attr('max', maxDate);
+	
+	$('#dob').bind('change paste keyup', function() {
+		var today = new Date();
+		var birthDate = new Date($(this).val());
+		var age = today.getFullYear() - birthDate.getFullYear();
+		var m = today.getMonth() - birthDate.getMonth();
+		
+		if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+			age--;
+		}
+		if(isNaN(age)) {
+			age = "";
+		}
+		$('#age').val(age);
+	});
 });
+
 </script>
 </head>
 <body style="margin-top: 50px;" ng-app="paitentsApp">
@@ -86,7 +90,7 @@ $(function(){
 
 			<div class="col-xs-8 col-xs-offset-2 col-md-4 col-md-offset-4">
 
-				<div class="card card-1">
+				<div class="card card-1" ng-controller="MainCtrl">
 					
 					<form action="/" method="POST" name="paitentForm" id="paitentForm">
 						<h4>Add paitient information</h4>
@@ -109,15 +113,16 @@ $(function(){
 							</select>
 						</div>
 						<div class="form-group">
-							<input type="date" id="dob" name="dob" ng-model="dob" placeholder="Date of birth" class="form-control" required>
+							<input type="date" id="dob" name="dob" ng-model="dob" placeholder="Date of birth" class="form-control" max="{{today}}" required>
+							<p ng-show="paitentForm.dob.$error.max" || paitentForm.dob === undefined" class="help-block">You can't enter future date in Date of birth</p>
 						</div>
 						<div class="form-group">
-							<input type="text" pattern="[0-9]{1,3}" id="age" value="{{ dob | ageFilter }}" min="0" name="age" placeholder="Age" class="form-control" required>
-							
+							<input type="text" ng-pattern="/^[0-9]*$/" id="age" ng-model="age" min="0" name="age" placeholder="Age" class="form-control" required>
+							<p ng-show="paitentForm.age.$error.pattern || paitentForm.age === undefined" class="help-block">Only number is allowed for age</p>
 						</div>
 						<div class="form-group">
 							<input type="text" ng-pattern="/^[0-9]*$/" name="phone" ng-maxlength="10" ng-maxlength="10" ng-model="phone" placeholder="*Phone" class="form-control" required>						
-							<p ng-show="paitentForm.phone.$error.pattern || paitentForm.phone === undefined" class="help-block">Number/Space/Special characters are not allowed for lastname</p>
+							<p ng-show="paitentForm.phone.$error.pattern || paitentForm.phone === undefined" class="help-block">Only number is allowed for phone</p>
 							<p ng-show="paitentForm.phone.$error.minlength || paitentForm.phone === undefined" class="help-block">Length of phone number has to be 10 {format: 8870563070} </p>
 							<p ng-show="paitentForm.phone.$error.maxlength || paitentForm.phone === undefined" class="help-block">Length of phone number has to be 10 {format: 8870563070} </p>
 						</div>
@@ -125,7 +130,7 @@ $(function(){
 							<Textarea class="form-textarea" maxlength="512" ng-model="other" name="other" cols="2" rows="2" placeholder="others"></Textarea>
 						</div>
 						<div class="form-group">
-							<input type="submit" name="submit" value="Submit" class="btn btn-primary" ng-disabled="paitentForm.$invalid"/>
+							<input type="submit" name="submit" value="Submit" class="btn btn-primary"/>
 						</div>
 					</form>
 			
