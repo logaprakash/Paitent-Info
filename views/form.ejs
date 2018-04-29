@@ -17,44 +17,30 @@
 <script>
 var app = angular.module('paitentsApp', []);
 app.controller('MainCtrl', function($scope) {
-  $scope.name = 'World';
-  var today=new Date();
-  $scope.today = today.toISOString();
-});
-</script>
-<script>
-$(function(){
-    var Today = new Date();
-
-    var month = Today.getMonth() + 1;
-    var day = Today.getDate();
-    var year = Today.getFullYear();
-
-    if(month < 10)
-        month = '0' + month.toString();
-    if(day < 10)
-        day = '0' + day.toString();
-
-    var maxDate = year + '-' + month + '-' + day;    
-    $('#dob').attr('max', maxDate);
 	
-	$('#dob').bind('change paste keyup', function() {
-		var today = new Date();
-		var birthDate = new Date($(this).val());
-		var age = today.getFullYear() - birthDate.getFullYear();
-		var m = today.getMonth() - birthDate.getMonth();
-		
-		if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-			age--;
-		}
-		if(isNaN(age)) {
+	$scope.name = 'World';
+	var today=new Date();
+	$scope.today = today.toISOString();
+	
+	$scope.calculateAge = function() {
+		var temp = $scope.dob;
+		var birthday = new Date(temp);
+		var ageDifMs = Date.now() - birthday.getTime();
+		var ageDate = new Date(ageDifMs); 
+		var age = Math.abs(ageDate.getFullYear() - 1970);
+		if(isNaN(age)){
 			age = "";
 		}
-		$('#age').val(age);
-	});
+		$scope.updateAge = age ;
+	
+      };
+    
 });
 
+
 </script>
+
+
 </head>
 <body style="margin-top: 50px;" ng-app="paitentsApp">
 <header><!--start header-->
@@ -90,9 +76,8 @@ $(function(){
 
 			<div class="col-xs-8 col-xs-offset-2 col-md-4 col-md-offset-4">
 
-				<div class="card card-1" ng-controller="MainCtrl">
-					
-					<form action="/" method="POST" name="paitentForm" id="paitentForm">
+				<div class="card card-1" >
+					<form action="/" method="POST" name="paitentForm" id="paitentForm" ng-controller="MainCtrl">
 						<h4>Add paitient information</h4>
 					
 						<div class="form-group">
@@ -113,11 +98,11 @@ $(function(){
 							</select>
 						</div>
 						<div class="form-group">
-							<input type="date" id="dob" name="dob" ng-model="dob" placeholder="Date of birth" class="form-control" max="{{today}}" required>
+							<input type="date" id="dob" name="dob" ng-model="dob" placeholder="Date of birth" class="form-control" ng-change="calculateAge()" max="{{today  | date: 'yyyy-MM-dd'}}" required>
 							<p ng-show="paitentForm.dob.$error.max" || paitentForm.dob === undefined" class="help-block">You can't enter future date in Date of birth</p>
 						</div>
 						<div class="form-group">
-							<input type="text" ng-pattern="/^[0-9]*$/" id="age" ng-model="age" min="0" name="age" placeholder="Age" class="form-control" required>
+							<input type="text" ng-pattern="/^[0-9]*$/" ng-value="updateAge" max="200" id="age" ng-model="age"  name="age" placeholder="Age" class="form-control" required>
 							<p ng-show="paitentForm.age.$error.pattern || paitentForm.age === undefined" class="help-block">Only number is allowed for age</p>
 						</div>
 						<div class="form-group">
